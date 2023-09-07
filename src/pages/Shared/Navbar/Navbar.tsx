@@ -4,7 +4,7 @@ import logo from "../../../../public/Logo.ico";
 const Navbar = () => {
   const navItems = [
     <li>
-      <Link to={"/books"}>Books</Link>
+      <Link to={"/books"}>All Books</Link>
     </li>,
     <li>
       <a>Recent Publish</a>
