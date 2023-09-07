@@ -21,7 +21,19 @@ const bookApi = api.injectEndpoints({
     }),
 
     getAllBooks: builder.query({
-      query: () => "/books",
+      query: ({ searchTerm, genre, publicationYear }) => {
+        let queryString = `/books?limit=40`;
+        if (searchTerm && searchTerm.length > 0) {
+          queryString += `&searchTerm=${searchTerm}`;
+        }
+        if (genre && genre.length > 0) {
+          queryString += `&genre=${genre}`;
+        }
+        if (publicationYear && publicationYear.length > 0) {
+          queryString += `&publicationYear=${publicationYear}`;
+        }
+        return queryString;
+      },
       providesTags: ["books"],
     }),
 
