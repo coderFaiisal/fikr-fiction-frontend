@@ -3,18 +3,12 @@ import logo from "../../../../public/Logo.ico";
 
 const Navbar = () => {
   const navItems = [
-    <li>
-      <Link to={"/books"}>All Books</Link>
-    </li>,
-    <li>
-      <a>Recent Publish</a>
-    </li>,
-    <li>
-      <a>Book Fair</a>
-    </li>,
+    <Link to={"/books"}>All Books</Link>,
+    <a>Recent Publish</a>,
+    <a>Book Fair</a>,
   ];
 
-  const items = navItems.map((item) => item);
+  const items = navItems.map((item, idx) => <li key={idx}>{item}</li>);
 
   return (
     <div className="navbar bg-base-100">
