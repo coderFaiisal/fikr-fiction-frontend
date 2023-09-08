@@ -3,7 +3,8 @@ import logo from "../../../../public/Logo.ico";
 
 const Navbar = () => {
   const navItems = [
-    <Link to={"/books"}>All Books</Link>,
+    <Link to="/">Home</Link>,
+    <Link to="/books">All Books</Link>,
     <a>Recent Publish</a>,
     <a>Book Fair</a>,
   ];

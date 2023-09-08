@@ -1,10 +1,4 @@
-import { useGetAllBooksQuery } from "../../redux/features/book/bookApi";
-
 const Home = () => {
-  const { data } = useGetAllBooksQuery(undefined);
-
-  console.log(data);
-
   return (
     <div>
       <img
