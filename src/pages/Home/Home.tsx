@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useGetAllBooksQuery } from "../../redux/features/book/bookApi";
 import { IBook } from "../../types/book.type";
 
@@ -5,7 +6,7 @@ const Home = () => {
   const { data, isLoading } = useGetAllBooksQuery({});
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <span className="loading loading-dots loading-lg"></span>;
   }
   return (
     <div>
@@ -16,8 +17,10 @@ const Home = () => {
           alt=""
         />
       </div>
-      <div>
-        <h1>TOP 10 RECENTLY ADDED BOOKS</h1>
+      <div className="my-16">
+        <h1 className="uppercase text-5xl font-bold text-center">
+          Top 10 recently added books
+        </h1>
         <div className="grid grid-cols-4">
           {data?.data?.slice(0, 10).map((book: IBook) => (
             <div
@@ -85,6 +88,27 @@ const Home = () => {
               </div>
             </div>
           ))}
+        </div>
+        <div className="flex justify-center">
+          <Link to="/books">
+            <button className="flex gap-2 items-center btn btn-wide btn-primary">
+              See All Books
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-6 h-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+                />
+              </svg>
+            </button>
+          </Link>
         </div>
       </div>
     </div>
