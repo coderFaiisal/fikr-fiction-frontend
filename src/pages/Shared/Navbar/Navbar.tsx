@@ -11,7 +11,7 @@ const Navbar = () => {
   const items = navItems.map((item, idx) => <li key={idx}>{item}</li>);
 
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar bg-base-100 sticky top-0 z-20 border border-b-[1px]">
       <div className="dropdown">
         <label tabIndex={0} className="btn btn-ghost lg:hidden">
           <svg
