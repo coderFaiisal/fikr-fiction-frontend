@@ -9,20 +9,6 @@ const userApi = api.injectEndpoints({
         method: "POST",
         body: data,
       }),
-      async onQueryStarted(_arg, { queryFulfilled, dispatch }) {
-        try {
-          const result = await queryFulfilled;
-          localStorage.setItem(
-            "user",
-            JSON.stringify({
-              accessToken: result.data.data.accessToken,
-            })
-          );
-          dispatch(userLoggedIn(result.data.data.accessToken));
-        } catch (error) {
-          console.log(error);
-        }
-      },
     }),
 
     loginUser: builder.mutation({

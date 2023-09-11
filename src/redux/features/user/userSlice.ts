@@ -24,7 +24,6 @@ const userSlice = createSlice({
   reducers: {
     userLoggedIn: (state, action) => {
       state.accessToken = action.payload;
-
       state.user = jwt_decode(action.payload);
     },
     userLoggedOut: (state) => {

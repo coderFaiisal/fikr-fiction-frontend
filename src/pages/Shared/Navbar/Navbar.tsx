@@ -7,6 +7,7 @@ import {
   ShoppingCartIcon,
   UserIcon,
 } from "@heroicons/react/24/outline";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
   const { user } = useAppSelector((state) => state.user);
@@ -15,6 +16,7 @@ const Navbar = () => {
   const handleLogout = () => {
     dispatch(userLoggedOut());
     localStorage.clear();
+    toast.success("User logout successfully");
   };
 
   const navItems = [
@@ -64,7 +66,9 @@ const Navbar = () => {
       {!user?.email ? (
         <div className="navbar-end">
           <Link to="/login">
-            <button className="btn btn-outline btn-sm btn-primary">Login</button>
+            <button className="btn btn-outline btn-sm btn-primary">
+              Login
+            </button>
           </Link>
         </div>
       ) : (

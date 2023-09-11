@@ -1,9 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useCreateUserMutation } from "../../redux/features/user/userApi";
-import useAuth from "../../hooks/useAuth";
 import { useEffect } from "react";
-import toast from "react-hot-toast/headless";
+import toast from "react-hot-toast";
 
 interface SignupFormInputs {
   name: string;
@@ -13,7 +13,7 @@ interface SignupFormInputs {
 }
 
 const Register = () => {
-  const [createUser, { data, error: resError }] = useCreateUserMutation();
+  const [createUser, { data, error }] = useCreateUserMutation();
 
   const {
     register,
@@ -21,26 +21,23 @@ const Register = () => {
     formState: { errors },
   } = useForm<SignupFormInputs>();
 
-  const isLoggedIn = useAuth();
-
   const location = useLocation();
   const navigate = useNavigate();
 
-  const from = location.state?.from?.pathname || "/";
+  const from = location.state?.from?.pathname || "/login";
 
   useEffect(() => {
-    if (isLoggedIn) {
+    if (data?.data?.email) {
+      toast.success("User created successfully");
+      toast.success("Please login now", {
+        duration: 6000,
+      });
       navigate(from, { replace: true });
     }
-    if (resError) {
-      toast.error("Failed to create user");
+    if (error) {
+      toast.error(error.data.message);
     }
-    if (data?.data?.accessToken) {
-      toast.success("User register successfully");
-      navigate(from, { replace: true });
-      // navigate("/");
-    }
-  }, [data, resError, from, isLoggedIn, navigate]);
+  }, [data, error]);
 
   const onSubmit = (data: SignupFormInputs) => {
     if (data.password !== data.confirmPassword) {

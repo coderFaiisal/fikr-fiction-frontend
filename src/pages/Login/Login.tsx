@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useLoginUserMutation } from "../../redux/features/user/userApi";
-import toast from "react-hot-toast/headless";
+import toast from "react-hot-toast";
 import useAuth from "../../hooks/useAuth";
 
 interface LoginFormInputs {
@@ -17,7 +17,9 @@ const Login = () => {
     formState: { errors },
   } = useForm<LoginFormInputs>();
 
-  const [login, { data, error: resError }] = useLoginUserMutation();
+  const [login, { data, error }] = useLoginUserMutation();
+
+  console.log(data);
   const isLoggedIn = useAuth();
 
   const location = useLocation();
@@ -33,14 +35,14 @@ const Login = () => {
     if (isLoggedIn) {
       navigate(from, { replace: true });
     }
-    if (resError) {
-      toast.error("Logged in failed");
+    if (error) {
+      toast.error(error?.data?.message);
     }
     if (data?.data?.accessToken) {
       toast.success("User logging successfully");
       navigate(from, { replace: true });
     }
-  }, [data, resError, isLoggedIn, navigate, from]);
+  }, [data, error]);
 
   return (
     <div className="hero min-h-screen bg-base-100">

@@ -7,7 +7,11 @@ function App() {
   return (
     <div className=" max-w-screen-xl mx-auto">
       <RouterProvider router={routes} />
-      <Toaster position="top-center" reverseOrder={false} />
+      <Toaster
+        toastOptions={{
+          duration: 3000,
+        }}
+      />
     </div>
   );
 }
