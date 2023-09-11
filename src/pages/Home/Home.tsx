@@ -27,9 +27,15 @@ const Home = () => {
           </div>
         ) : (
           <div className="grid grid-cols-4">
-            {data?.data?.slice(0, 10).map((book: IBook) => (
-              <BookCard key={book._id} book={book}></BookCard>
-            ))}
+            {[...data.data]
+              ?.sort(
+                (a: IBook, b: IBook) =>
+                  parseFloat(b.ratings) - parseFloat(a.ratings)
+              )
+              .slice(0, 10)
+              .map((book: IBook) => (
+                <BookCard key={book._id} book={book}></BookCard>
+              ))}
           </div>
         )}
 

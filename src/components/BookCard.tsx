@@ -21,6 +21,7 @@ const BookCard = ({ book }: IProps) => {
         <p>Author: {book?.author}</p>
         <p>Genre: {book?.genre}</p>
         <p>Publication Year: {book?.publicationYear}</p>
+        <p>Ratings: {book?.ratings}</p>
 
         <div className="card-actions flex">
           <span
