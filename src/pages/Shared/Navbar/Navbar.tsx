@@ -1,7 +1,22 @@
 import { Link } from "react-router-dom";
 import logo from "../../../../public/Logo.ico";
+import { useAppDispatch, useAppSelector } from "../../../redux/hook";
+import { userLoggedOut } from "../../../redux/features/user/userSlice";
+import {
+  BellIcon,
+  ShoppingCartIcon,
+  UserIcon,
+} from "@heroicons/react/24/outline";
 
 const Navbar = () => {
+  const { user } = useAppSelector((state) => state.user);
+  const dispatch = useAppDispatch();
+
+  const handleLogout = () => {
+    dispatch(userLoggedOut());
+    localStorage.clear();
+  };
+
   const navItems = [
     <Link to="/">Home</Link>,
     <Link to="/books">All Books</Link>,
@@ -46,93 +61,65 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1 text-lg">{items}</ul>
       </div>
 
-      <div className="navbar-end">
-        <div className="dropdown dropdown-end">
-          <label tabIndex={0} className="btn btn-ghost btn-circle">
-            <div className="indicator">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                />
-              </svg>
-              <span className="badge badge-sm indicator-item">8</span>
-            </div>
-          </label>
-          <div
-            tabIndex={0}
-            className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow"
-          >
-            <div className="card-body">
-              <span className="font-bold text-lg">8 Items</span>
-              <span className="text-info">Subtotal: $999</span>
-              <div className="card-actions">
-                <button className="btn btn-primary btn-block">View cart</button>
+      {!user?.email ? (
+        <div className="navbar-end">
+          <Link to="/login">
+            <button className="btn btn-outline btn-sm btn-primary">Login</button>
+          </Link>
+        </div>
+      ) : (
+        <div className="navbar-end">
+          <div className="dropdown dropdown-end">
+            <label tabIndex={0} className="btn btn-ghost btn-circle">
+              <div className="indicator">
+                <ShoppingCartIcon className="w-6" />
+                <span className="badge badge-sm indicator-item">8</span>
+              </div>
+            </label>
+            <div
+              tabIndex={0}
+              className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow"
+            >
+              <div className="card-body">
+                <span className="font-bold text-lg">8 Items</span>
+                <span className="text-info">Subtotal: $999</span>
+                <div className="card-actions">
+                  <button className="btn btn-primary btn-block">
+                    View cart
+                  </button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <button className="btn btn-ghost btn-circle">
-          <div className="indicator">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
-              />
-            </svg>
-            <span className="badge badge-xs badge-primary indicator-item"></span>
-          </div>
-        </button>
-        <div className="dropdown dropdown-end">
-          <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-            <div className="w-6 rounded-full">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
-                />
-              </svg>
+          <button className="btn btn-ghost btn-circle">
+            <div className="indicator">
+              <BellIcon className="w-6" />
+              <span className="badge badge-xs badge-primary indicator-item"></span>
             </div>
-          </label>
-          <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-32"
-          >
-            <li>
-              <a className="justify-between">Profile</a>
-            </li>
-            <li>
-              <a>Settings</a>
-            </li>
-            <li>
-              <a>Logout</a>
-            </li>
-          </ul>
+          </button>
+          <div className="dropdown dropdown-end">
+            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+              <div className="w-6 rounded-full">
+                <UserIcon className="w-6" />
+              </div>
+            </label>
+            <ul
+              tabIndex={0}
+              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-32"
+            >
+              <li>
+                <a className="justify-between">Profile</a>
+              </li>
+              <li>
+                <a>Settings</a>
+              </li>
+              <li>
+                <a onClick={handleLogout}>Logout</a>
+              </li>
+            </ul>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
