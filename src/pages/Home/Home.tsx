@@ -3,6 +3,7 @@ import { useGetAllBooksQuery } from "../../redux/features/book/bookApi";
 import { IBook } from "../../types/book.type";
 import { ArrowSmallRightIcon } from "@heroicons/react/24/solid";
 import BookCard from "../../components/BookCard";
+import Loading from "../../components/Loading";
 
 const Home = () => {
   const { data, isLoading } = useGetAllBooksQuery({});
@@ -22,9 +23,7 @@ const Home = () => {
         </h1>
 
         {isLoading ? (
-          <div className="flex justify-center my-6">
-            <span className="loading loading-ring loading-lg"></span>
-          </div>
+          <Loading />
         ) : (
           <div className="grid grid-cols-4">
             {[...data.data]
