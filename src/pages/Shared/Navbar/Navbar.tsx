@@ -3,9 +3,9 @@ import logo from "../../../../public/Logo.ico";
 import { useAppDispatch, useAppSelector } from "../../../redux/hook";
 import { userLoggedOut } from "../../../redux/features/user/userSlice";
 import {
-  BellIcon,
-  ShoppingCartIcon,
   UserIcon,
+  HeartIcon,
+  ClipboardDocumentListIcon,
 } from "@heroicons/react/24/outline";
 import toast from "react-hot-toast";
 
@@ -76,7 +76,7 @@ const Navbar = () => {
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle">
               <div className="indicator">
-                <ShoppingCartIcon className="w-6" />
+                <HeartIcon className="w-6" />
                 <span className="badge badge-sm indicator-item">8</span>
               </div>
             </label>
@@ -97,7 +97,7 @@ const Navbar = () => {
           </div>
           <button className="btn btn-ghost btn-circle">
             <div className="indicator">
-              <BellIcon className="w-6" />
+              <ClipboardDocumentListIcon className="w-6" />
               <span className="badge badge-xs badge-primary indicator-item"></span>
             </div>
           </button>
@@ -115,7 +115,7 @@ const Navbar = () => {
                 <a className="justify-between">Profile</a>
               </li>
               <li>
-                <a>Settings</a>
+                <Link to="add-new-book">Add New</Link>
               </li>
               <li>
                 <a onClick={handleLogout}>Logout</a>
