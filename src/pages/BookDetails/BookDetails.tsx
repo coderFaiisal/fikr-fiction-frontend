@@ -1,4 +1,4 @@
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useAppSelector } from "../../redux/hook";
 import {
   useDeleteBookMutation,
@@ -12,7 +12,6 @@ import BookReview from "../../components/BookReview";
 const BookDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const location = useLocation();
 
   const { user } = useAppSelector((state) => state.user);
 
@@ -52,23 +51,44 @@ const BookDetails = () => {
           <div className="flex space-x-3 pt-2">
             {data?.data?.authorEmail === user?.email && (
               <>
-                <button
-                  className="btn btn-primary"
-                  onClick={() =>
-                    navigate(`/update-book/${id}`, {
-                      state: { from: location },
-                      replace: true,
-                    })
-                  }
-                >
-                  Edit
-                </button>
-                <button
-                  onClick={handleDelete}
-                  className="w-[73px] btn bg-red-500 text-white"
+                <Link to={`/update-book/${id}`}>
+                  <button className="btn btn-primary">Edit</button>
+                </Link>
+
+                {/* delete modal button */}
+                <label
+                  className="btn bg-red-500 text-white "
+                  htmlFor="modalForm"
                 >
                   Delete
-                </button>
+                </label>
+
+                {/* delete modal form */}
+                <input
+                  type="checkbox"
+                  id="modalForm"
+                  className="modal-toggle"
+                />
+                <div className="modal">
+                  <div className="modal-box">
+                    <h3 className="font-bold text-lg text-red-400">
+                      Are You Sure?
+                    </h3>
+                    <p className="py-4">This Book Will Delete Permanently!</p>
+                    <div className="flex justify-end gap-4">
+                      <label htmlFor="modalForm" className="btn btn-sm">
+                        Close
+                      </label>
+                      <label
+                        onClick={handleDelete}
+                        htmlFor="modalForm"
+                        className="btn btn-sm bg-red-500 text-white"
+                      >
+                        Delete
+                      </label>
+                    </div>
+                  </div>
+                </div>
               </>
             )}
           </div>

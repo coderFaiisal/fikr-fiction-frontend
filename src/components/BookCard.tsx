@@ -1,5 +1,8 @@
 import { IBook } from "../types/book.type";
-import { HeartIcon, ClipboardDocumentListIcon } from "@heroicons/react/24/outline";
+import {
+  HeartIcon,
+  ClipboardDocumentListIcon,
+} from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
 
 type IProps = {
@@ -12,8 +15,8 @@ const BookCard = ({ book }: IProps) => {
       <figure>
         <img
           className="w-full hover:scale-105 duration-200"
-          src="https://ds.rokomari.store/rokomari110/ProductNew20190903/260X372/e53af8191_202772.jpg"
-          alt="Books"
+          src={book?.photoURL}
+          alt="Book Image"
         />
       </figure>
       <div className="card-body">
@@ -36,11 +39,10 @@ const BookCard = ({ book }: IProps) => {
           >
             <ClipboardDocumentListIcon className="w-8 h-8" />
           </span>
-          
         </div>
         <Link to={`/book/${book?._id}`}>
-            <span className="btn btn-xs btn-primary w-full">view details...</span>
-          </Link>
+          <span className="btn btn-xs btn-primary w-full">view details...</span>
+        </Link>
       </div>
     </div>
   );

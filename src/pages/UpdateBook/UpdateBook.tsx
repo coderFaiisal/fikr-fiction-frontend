@@ -1,7 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useNavigate } from "react-router-dom";
-import { useAppSelector } from "../../redux/hook";
-import { useCreateBookMutation } from "../../redux/features/book/bookApi";
+import { useNavigate, useParams } from "react-router-dom";
+import {
+  useGetSingleBookQuery,
+  useUpdateBookMutation,
+} from "../../redux/features/book/bookApi";
 import { useForm } from "react-hook-form";
 import { IBook } from "../../types/book.type";
 import { useEffect } from "react";
@@ -9,24 +11,22 @@ import toast from "react-hot-toast";
 import Loading from "../../components/Loading";
 
 const UpdateBook = () => {
-  const { user } = useAppSelector((state) => state.user);
+  const { id } = useParams();
   const navigate = useNavigate();
-  const [createBook, { isLoading, isSuccess, error }] = useCreateBookMutation();
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<IBook>();
+  const { data } = useGetSingleBookQuery(id);
+
+  const [UpdateBook, { isLoading, isSuccess, error }] = useUpdateBookMutation();
+
+  const { register, handleSubmit } = useForm<IBook>();
 
   const onSubmit = (data: IBook) => {
-    const bookData = {
-      ...data,
-      authorEmail: user?.email,
-      reviews: [],
+    const updatedData = {
+      id,
+      data,
     };
 
-    createBook(bookData);
+    UpdateBook(updatedData);
   };
 
   useEffect(() => {
@@ -34,7 +34,7 @@ const UpdateBook = () => {
       toast.error((error as any)?.data.message);
     }
     if (isSuccess) {
-      toast.success("Book added successfully");
+      toast.success("Book updated successfully");
       navigate("/books");
     }
   }, [isSuccess, error, navigate]);
@@ -43,7 +43,7 @@ const UpdateBook = () => {
     <div className="flex justify-center mx-auto">
       <div className="w-[50%] my-10">
         <p className="text-center text-5xl font-semibold mb-10">
-          Add Book Information
+          Update Book Information
         </p>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="grid gap-2">
@@ -53,11 +53,11 @@ const UpdateBook = () => {
                 <input
                   id="Title"
                   placeholder="Book Title"
+                  defaultValue={data?.data?.title}
                   type="text"
                   className="input input-sm input-bordered  w-full"
-                  {...register("title", { required: "Title is required" })}
+                  {...register("title")}
                 />
-                {errors?.title && <p>{errors?.title?.message}</p>}
               </div>
 
               <div>
@@ -66,12 +66,10 @@ const UpdateBook = () => {
                   id="author"
                   placeholder="Author Name"
                   type="text"
+                  defaultValue={data?.data?.author}
                   className="input input-sm input-bordered  w-full"
-                  {...register("author", {
-                    required: "Author Name is required",
-                  })}
+                  {...register("author")}
                 />
-                {errors?.author && <p>{errors?.author?.message}</p>}
               </div>
 
               <div>
@@ -80,12 +78,10 @@ const UpdateBook = () => {
                   id="photoURL"
                   placeholder="Image"
                   type="text"
+                  defaultValue={data?.data?.photoURL}
                   className="input input-sm input-bordered  w-full"
-                  {...register("photoURL", {
-                    required: "Book image is required",
-                  })}
+                  {...register("photoURL")}
                 />
-                {errors?.photoURL && <p>{errors?.photoURL?.message}</p>}
               </div>
 
               <div>
@@ -94,10 +90,10 @@ const UpdateBook = () => {
                   id="genre"
                   placeholder="Genre"
                   type="text"
+                  defaultValue={data?.data?.genre}
                   className="input input-sm input-bordered  w-full"
-                  {...register("genre", { required: "Genre is required" })}
+                  {...register("genre")}
                 />
-                {errors?.genre && <p>{errors?.genre?.message}</p>}
               </div>
               <div>
                 <p className="font-semibold">Publication Year</p>
@@ -105,14 +101,10 @@ const UpdateBook = () => {
                   id="publicationYear"
                   placeholder="Publication Year"
                   type="text"
+                  defaultValue={data?.data?.publicationYear}
                   className="input input-sm input-bordered  w-full"
-                  {...register("publicationYear", {
-                    required: "Publication Year is required",
-                  })}
+                  {...register("publicationYear")}
                 />
-                {errors?.publicationYear && (
-                  <p>{errors?.publicationYear?.message}</p>
-                )}
               </div>
 
               <div>
@@ -121,18 +113,16 @@ const UpdateBook = () => {
                   id="ratings"
                   placeholder="Ratings"
                   type="number"
+                  defaultValue={data?.data?.ratings}
                   className="input input-sm input-bordered  w-full"
-                  {...register("ratings", {
-                    required: "Rating is required",
-                  })}
+                  {...register("ratings")}
                 />
-                {errors?.ratings && <p>{errors?.ratings?.message}</p>}
               </div>
             </div>
             {isLoading ? (
               <Loading />
             ) : (
-              <button className="btn btn-sm btn-primary"> Add New Book </button>
+              <button className="btn btn-sm btn-primary">Update</button>
             )}
           </div>
         </form>

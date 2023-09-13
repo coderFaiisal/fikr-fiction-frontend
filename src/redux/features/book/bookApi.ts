@@ -48,7 +48,7 @@ const bookApi = api.injectEndpoints({
         method: "PATCH",
         body: data,
       }),
-      invalidatesTags: ["books"],
+      invalidatesTags: ["books", "book"],
     }),
 
     deleteBook: builder.mutation({
