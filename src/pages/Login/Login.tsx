@@ -19,7 +19,6 @@ const Login = () => {
 
   const [login, { data, error }] = useLoginUserMutation();
 
-  console.log(data);
   const isLoggedIn = useAuth();
 
   const location = useLocation();
