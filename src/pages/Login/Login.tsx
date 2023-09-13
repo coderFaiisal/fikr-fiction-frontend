@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -35,13 +36,13 @@ const Login = () => {
       navigate(from, { replace: true });
     }
     if (error) {
-      toast.error(error?.data?.message);
+      toast.error((error as any)?.data?.message);
     }
     if (data?.data?.accessToken) {
       toast.success("User logging successfully");
       navigate(from, { replace: true });
     }
-  }, [data, error]);
+  }, [data, error, from, isLoggedIn, navigate]);
 
   return (
     <div className="hero min-h-screen bg-base-100">

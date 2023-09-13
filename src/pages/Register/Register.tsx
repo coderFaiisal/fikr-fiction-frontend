@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -35,7 +36,7 @@ const Register = () => {
       navigate(from, { replace: true });
     }
     if (error) {
-      toast.error(error.data.message);
+      toast.error((error as any).data.message);
     }
   }, [data, error]);
 

@@ -6,35 +6,54 @@ import NotFound from "../pages/NotFound/NotFound";
 import Register from "../pages/Register/Register";
 import Login from "../pages/Login/Login";
 import BookDetails from "../pages/BookDetails/BookDetails";
+import AddNewBook from "../pages/AddNewBook/AddNewBook";
+import PrivateRoute from "./PrivateRoute";
+import UpdateBook from "../pages/UpdateBook/UpdateBook";
 
 export const routes = createBrowserRouter([
   {
     path: "/",
-    element: <MainLayout></MainLayout>,
+    element: <MainLayout />,
     children: [
       {
         path: "/",
-        element: <Home></Home>,
+        element: <Home />,
       },
       {
         path: "/books",
-        element: <Books></Books>,
+        element: <Books />,
+      },
+      {
+        path: "/add-new-book",
+        element: (
+          <PrivateRoute>
+            <AddNewBook />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/update-book/:id",
+        element: (
+          <PrivateRoute>
+            <UpdateBook />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/book/:id",
-        element: <BookDetails></BookDetails>,
+        element: <BookDetails />,
       },
       {
         path: "/register",
-        element: <Register></Register>,
+        element: <Register />,
       },
       {
         path: "/login",
-        element: <Login></Login>,
+        element: <Login />,
       },
       {
         path: "*",
-        element: <NotFound></NotFound>,
+        element: <NotFound />,
       },
     ],
   },

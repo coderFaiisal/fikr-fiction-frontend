@@ -109,13 +109,13 @@ const Navbar = () => {
             </label>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-32"
+              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-40"
             >
               <li>
                 <a className="justify-between">Profile</a>
               </li>
               <li>
-                <Link to="add-new-book">Add New</Link>
+                <Link to="add-new-book">Add New Book</Link>
               </li>
               <li>
                 <a onClick={handleLogout}>Logout</a>

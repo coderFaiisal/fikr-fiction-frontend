@@ -16,8 +16,6 @@ const BookDetails = () => {
 
   const { user } = useAppSelector((state) => state.user);
 
-  const { data: wishlisted } = useGetSingleBookQuery(id);
-
   const { data, isLoading } = useGetSingleBookQuery(id);
 
   const [deleteBook, { isSuccess }] = useDeleteBookMutation();
@@ -28,12 +26,12 @@ const BookDetails = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      toast.success("Book delete successfully");
+      toast.success("Book deleted successfully");
       navigate("/books");
     }
   }, [isSuccess, navigate]);
 
-  if (isLoading) return <Loading></Loading>;
+  if (isLoading) return <Loading />;
 
   return (
     <div className="px-10 xl:px-20 py-10">
@@ -49,21 +47,13 @@ const BookDetails = () => {
             Publication Year: {data?.data?.publicationYear}
           </p>
           <p className="text-xl">Rating: {data?.data?.ratings}</p>
-          {user && wishlisted?.data?.status && (
-            <p className="text-xl">
-              Status:{" "}
-              <span className="text-violet-500 font-semibold">
-                {wishlisted?.data?.status}
-              </span>
-            </p>
-          )}
           <div className="flex space-x-3 pt-2">
-            {data?.data?.postedBy === user?._id && (
+            {data?.data?.authorEmail === user?.email && (
               <>
                 <button
                   className="btn btn-primary"
                   onClick={() =>
-                    navigate(`/edit-book/${id}`, {
+                    navigate(`/update-book/${id}`, {
                       state: { from: location },
                       replace: true,
                     })
