@@ -18,7 +18,9 @@ const BookDetails = () => {
 
   const { data, isLoading } = useGetSingleBookQuery(id);
 
-  const [deleteBook, { isSuccess }] = useDeleteBookMutation();
+  const [deleteBook, { isSuccess, isError }] = useDeleteBookMutation();
+
+  console.log(isError);
 
   const handleDelete = () => {
     deleteBook(id);
