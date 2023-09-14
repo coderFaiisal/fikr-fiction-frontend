@@ -1,17 +1,23 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { RootState } from "../store";
-import { userLoggedOut } from "../features/user/userSlice";
 
 export const api = createApi({
   reducerPath: "api",
-  tagTypes: ["users", "book", "books", "wishLists", "wishList", "readingLists"],
+  tagTypes: [
+    "book",
+    "books",
+    "wishList",
+    "wishLists",
+    "readingList",
+    "readingLists",
+  ],
   baseQuery: async (args, api, extraOptions) => {
     const result = await baseQuery(args, api, extraOptions);
 
-    if (result?.error?.status === 401 || result?.error?.status === 404) {
-      api.dispatch(userLoggedOut());
-      localStorage.clear();
-    }
+    // if (result?.error?.status === 401 || result?.error?.status === 404) {
+    //   api.dispatch(userLoggedOut());
+    //   localStorage.clear();
+    // }
     return result;
   },
   endpoints: () => ({}),

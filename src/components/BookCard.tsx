@@ -32,12 +32,20 @@ const BookCard = ({ book }: IProps) => {
 
   const [
     createWishList,
-    { isLoading: createWishLoading, isSuccess: createWishSuccess },
+    {
+      isLoading: createWishLoading,
+      isSuccess: createWishSuccess,
+      isError: createWishError,
+    },
   ] = useCreateWishListMutation();
 
   const [
     deleteWishlist,
-    { isLoading: deleteWishLoading, isSuccess: deleteWishSuccess },
+    {
+      isLoading: deleteWishLoading,
+      isSuccess: deleteWishSuccess,
+      isError: deleteWishError,
+    },
   ] = useDeleteWishListMutation();
 
   const handleAddToWishlist = () => {
@@ -58,19 +66,22 @@ const BookCard = ({ book }: IProps) => {
   };
 
   useEffect(() => {
-    if (createWishSuccess) {
+    if (createWishSuccess === true) {
       toast.success("Book successfully added into wish list");
     }
-  }, [createWishSuccess]);
-
-  useEffect(() => {
-    if (deleteWishSuccess) {
+    if (createWishError === true) {
+      toast.error("Failed to added into wish list");
+    }
+    if (deleteWishSuccess === true) {
       toast.success("Book removed from wish list");
     }
-  }, [deleteWishSuccess]);
+    if (deleteWishError === true) {
+      toast.error("Failed to remove from wish list");
+    }
+  }, [createWishSuccess, createWishError, deleteWishSuccess, deleteWishError]);
 
   //reading list functionality
-  const { data: ReadingData } = useGetSingleReadingListsQuery(book?._id);
+  const { data: readingData } = useGetSingleReadingListsQuery(book?._id);
 
   const [
     createReadingList,
@@ -154,7 +165,7 @@ const BookCard = ({ book }: IProps) => {
             </button>
           )}
 
-          {user && ReadingData?.data === null ? (
+          {user && readingData?.data === null ? (
             <button
               onClick={handleAddToReadinglist}
               className="rounded-full tooltip"
@@ -189,13 +200,3 @@ const BookCard = ({ book }: IProps) => {
 };
 
 export default BookCard;
-
-// const readingListSchema = new Schema<IReadingList>({
-//   userEmail: { type: String, required: true },
-//   bookId: { type: Schema.Types.ObjectId, ref: 'Book', required: true },
-//   status: {
-//     type: String,
-//     enum: ['reading', 'read soon', 'finished'],
-//     required: true,
-//   },
-// });

@@ -4,8 +4,10 @@ import { useGetAllWishListsQuery } from "../../redux/features/wishList/wishListA
 import { IWishList } from "../../types/wishList.type";
 
 const WishLists = () => {
-  const { data, isLoading } = useGetAllWishListsQuery(undefined);
-  console.log(data);
+  const { data, isLoading } = useGetAllWishListsQuery(undefined, {
+    refetchOnMountOrArgChange: true,
+  });
+
   if (isLoading) {
     return <Loading />;
   }
@@ -14,9 +16,7 @@ const WishLists = () => {
     <div>
       {data?.data?.length === 0 ? (
         <div className="my-12">
-          <h1 className="text-2xl text-center text-red-500">
-            No Book Found In Wish List!
-          </h1>
+          <h1 className="text-2xl text-center">No Book Found In Wish List!</h1>
         </div>
       ) : (
         <div className="grid grid-cols-4">

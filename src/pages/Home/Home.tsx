@@ -4,6 +4,7 @@ import { IBook } from "../../types/book.type";
 import { ArrowSmallRightIcon } from "@heroicons/react/24/solid";
 import BookCard from "../../components/BookCard";
 import Loading from "../../components/Loading";
+import bg from "../../../public/bg_image.jpg";
 
 const Home = () => {
   const { data, isLoading } = useGetAllBooksQuery({});
@@ -11,11 +12,7 @@ const Home = () => {
   return (
     <div>
       <div>
-        <img
-          className="w-full"
-          src="https://wafilife-media.wafilife.com/uploads/2023/03/boi_suggetion-mobile-1.jpg"
-          alt=""
-        />
+        <img className="w-full" src={bg} alt="background-image" />
       </div>
       <div className="my-16">
         <h1 className="uppercase text-5xl font-bold text-center">

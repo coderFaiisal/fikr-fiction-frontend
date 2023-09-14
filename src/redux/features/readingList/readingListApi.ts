@@ -8,12 +8,12 @@ const bookApi = api.injectEndpoints({
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["readingLists"],
+      invalidatesTags: ["readingLists", "readingList"],
     }),
 
     getSingleReadingLists: builder.query({
       query: (id) => `/readingLists/${id}`,
-      providesTags: ["readingLists"],
+      providesTags: ["readingList"],
     }),
 
     getAllReadingLists: builder.query({
@@ -27,7 +27,7 @@ const bookApi = api.injectEndpoints({
         method: "PATCH",
         body: data,
       }),
-      invalidatesTags: ["readingLists"],
+      invalidatesTags: ["readingList", "readingLists"],
     }),
 
     deleteReadingList: builder.mutation({
@@ -35,7 +35,7 @@ const bookApi = api.injectEndpoints({
         url: `/readingLists/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: ["readingLists"],
+      invalidatesTags: ["readingLists", "readingList"],
     }),
   }),
 });

@@ -37,13 +37,13 @@ const WishListCard = ({ wishList }: IProps) => {
     <div className="card bg-base-100 shadow-xl p-4 mx-4 my-8 cursor-pointer">
       <figure>
         {deleteWishLoading ? (
-          <div className=" absolute -top-2 right-4 z-50">
+          <div className=" absolute -top-2 right-4 z-30">
             <Loading />
           </div>
         ) : (
           <XMarkIcon
             onClick={handleRemoveFromWishlist}
-            className="w-8 bg-white text-black rounded-full p-1 absolute top-4 right-4 z-50"
+            className="w-8 bg-white text-black rounded-full p-1 absolute top-4 right-4 z-10"
           />
         )}
         <img

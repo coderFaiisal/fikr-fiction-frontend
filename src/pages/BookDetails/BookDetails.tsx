@@ -19,18 +19,19 @@ const BookDetails = () => {
 
   const [deleteBook, { isSuccess, isError }] = useDeleteBookMutation();
 
-  console.log(isError);
-
   const handleDelete = () => {
     deleteBook(id);
   };
 
   useEffect(() => {
+    if (isError) {
+      toast.error("Failed to delete book");
+    }
     if (isSuccess) {
       toast.success("Book deleted successfully");
       navigate("/books");
     }
-  }, [isSuccess, navigate]);
+  }, [isSuccess, isError, navigate]);
 
   if (isLoading) return <Loading />;
 

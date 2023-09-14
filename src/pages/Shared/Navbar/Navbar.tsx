@@ -13,7 +13,9 @@ import { useGetAllReadingListsQuery } from "../../../redux/features/readingList/
 
 const Navbar = () => {
   const { user } = useAppSelector((state) => state.user);
-  const { data: wishListData } = useGetAllWishListsQuery(undefined);
+  const { data: wishListData } = useGetAllWishListsQuery(undefined, {
+    pollingInterval: 500000,
+  });
   const { data: readingListData } = useGetAllReadingListsQuery(undefined);
 
   const dispatch = useAppDispatch();
@@ -33,7 +35,7 @@ const Navbar = () => {
   const items = navItems.map((item, idx) => <li key={idx}>{item}</li>);
 
   return (
-    <div className="navbar bg-base-100 sticky top-0 z-20 border border-b-[1px]">
+    <div className="navbar bg-base-200 sticky top-0 z-20 border border-b-[1px]">
       <div className="dropdown">
         <label tabIndex={0} className="btn btn-ghost lg:hidden">
           <svg
@@ -79,27 +81,27 @@ const Navbar = () => {
       ) : (
         <div className="navbar-end">
           <div className="dropdown dropdown-end">
-            <label tabIndex={0} className="btn btn-ghost btn-circle">
-              <Link to="/wishLists">
+            <Link to="/wishLists">
+              <label tabIndex={0} className="btn btn-ghost btn-circle">
                 <div className="indicator">
                   <HeartIcon className="w-6" />
                   <span className="badge badge-sm indicator-item">
                     {wishListData?.data?.length}
                   </span>
                 </div>
-              </Link>
-            </label>
+              </label>
+            </Link>
           </div>
-          <button className="btn btn-ghost btn-circle">
-            <Link to="/readingLists">
+          <Link to="/readingLists">
+            <button className="btn btn-ghost btn-circle">
               <div className="indicator">
                 <ClipboardDocumentListIcon className="w-6" />
-                <span className="badge badge-xs badge-primary indicator-item">
+                <span className="badge badge-sm badge-primary indicator-item">
                   {readingListData?.data?.length}
                 </span>
               </div>
-            </Link>
-          </button>
+            </button>
+          </Link>
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="w-6 rounded-full">
@@ -108,7 +110,7 @@ const Navbar = () => {
             </label>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-40"
+              className="menu menu-sm dropdown-content mt-3 z-50 p-2 shadow bg-base-100 rounded-box w-40"
             >
               <li>
                 <a className="justify-between">Profile</a>
