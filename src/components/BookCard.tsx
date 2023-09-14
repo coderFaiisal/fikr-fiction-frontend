@@ -122,10 +122,6 @@ const BookCard = ({ book }: IProps) => {
 
 export default BookCard;
 
-// const wishListSchema = new Schema<IWishList>({
-//   userEmail: { type: String, required: true },
-//   bookId: { type: Schema.Types.ObjectId, ref: 'Book', required: true },
-// });
 
 // const readingListSchema = new Schema<IReadingList>({
 //   userEmail: { type: String, required: true },

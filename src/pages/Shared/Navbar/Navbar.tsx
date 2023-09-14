@@ -8,9 +8,12 @@ import {
   ClipboardDocumentListIcon,
 } from "@heroicons/react/24/outline";
 import toast from "react-hot-toast";
+import { useGetAllWishListsQuery } from "../../../redux/features/wishList/wishListApi";
 
 const Navbar = () => {
   const { user } = useAppSelector((state) => state.user);
+  const { data } = useGetAllWishListsQuery(undefined);
+
   const dispatch = useAppDispatch();
 
   const handleLogout = () => {
@@ -75,25 +78,15 @@ const Navbar = () => {
         <div className="navbar-end">
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle">
-              <div className="indicator">
-                <HeartIcon className="w-6" />
-                <span className="badge badge-sm indicator-item">8</span>
-              </div>
-            </label>
-            <div
-              tabIndex={0}
-              className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow"
-            >
-              <div className="card-body">
-                <span className="font-bold text-lg">8 Items</span>
-                <span className="text-info">Subtotal: $999</span>
-                <div className="card-actions">
-                  <button className="btn btn-primary btn-block">
-                    View cart
-                  </button>
+              <Link to="/wishLists">
+                <div className="indicator">
+                  <HeartIcon className="w-6" />
+                  <span className="badge badge-sm indicator-item">
+                    {data?.data?.length}
+                  </span>
                 </div>
-              </div>
-            </div>
+              </Link>
+            </label>
           </div>
           <button className="btn btn-ghost btn-circle">
             <div className="indicator">
