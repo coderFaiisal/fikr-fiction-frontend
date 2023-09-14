@@ -18,8 +18,8 @@ export const api = createApi({
 });
 
 const baseQuery = fetchBaseQuery({
-  // baseUrl: "https://fikr-fiction-backend.vercel.app/api/v1",
-  baseUrl: "http://localhost:5000/api/v1",
+  baseUrl: "https://fikr-fiction-backend.vercel.app/api/v1",
+  // baseUrl: "http://localhost:5000/api/v1",
   prepareHeaders: async (headers, { getState }) => {
     const token = (getState() as RootState)?.user?.accessToken;
     if (token) {

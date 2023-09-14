@@ -29,11 +29,21 @@ const bookApi = api.injectEndpoints({
       }),
       invalidatesTags: ["readingLists"],
     }),
+
+    deleteReadingList: builder.mutation({
+      query: (id) => ({
+        url: `/readingLists/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["readingLists"],
+    }),
   }),
 });
 
 export const {
   useCreateReadingListMutation,
   useGetAllReadingListsQuery,
+  useGetSingleReadingListsQuery,
   useUpdateReadingListMutation,
+  useDeleteReadingListMutation,
 } = bookApi;

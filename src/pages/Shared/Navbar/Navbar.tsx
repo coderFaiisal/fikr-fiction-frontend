@@ -9,10 +9,12 @@ import {
 } from "@heroicons/react/24/outline";
 import toast from "react-hot-toast";
 import { useGetAllWishListsQuery } from "../../../redux/features/wishList/wishListApi";
+import { useGetAllReadingListsQuery } from "../../../redux/features/readingList/readingListApi";
 
 const Navbar = () => {
   const { user } = useAppSelector((state) => state.user);
-  const { data } = useGetAllWishListsQuery(undefined);
+  const { data: wishListData } = useGetAllWishListsQuery(undefined);
+  const { data: readingListData } = useGetAllReadingListsQuery(undefined);
 
   const dispatch = useAppDispatch();
 
@@ -25,7 +27,7 @@ const Navbar = () => {
   const navItems = [
     <Link to="/">Home</Link>,
     <Link to="/books">All Books</Link>,
-    <a>Book Fair</a>,
+    <Link to="/bookFair">Book Fair</Link>,
   ];
 
   const items = navItems.map((item, idx) => <li key={idx}>{item}</li>);
@@ -82,17 +84,21 @@ const Navbar = () => {
                 <div className="indicator">
                   <HeartIcon className="w-6" />
                   <span className="badge badge-sm indicator-item">
-                    {data?.data?.length}
+                    {wishListData?.data?.length}
                   </span>
                 </div>
               </Link>
             </label>
           </div>
           <button className="btn btn-ghost btn-circle">
-            <div className="indicator">
-              <ClipboardDocumentListIcon className="w-6" />
-              <span className="badge badge-xs badge-primary indicator-item"></span>
-            </div>
+            <Link to="/readingLists">
+              <div className="indicator">
+                <ClipboardDocumentListIcon className="w-6" />
+                <span className="badge badge-xs badge-primary indicator-item">
+                  {readingListData?.data?.length}
+                </span>
+              </div>
+            </Link>
           </button>
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
