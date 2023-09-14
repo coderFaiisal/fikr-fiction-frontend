@@ -34,7 +34,7 @@ const bookApi = api.injectEndpoints({
         }
         return queryString;
       },
-      providesTags: ["books"],
+      providesTags: ["books", "wishLists"],
     }),
 
     getSingleBook: builder.query({

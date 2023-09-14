@@ -11,6 +11,11 @@ const bookApi = api.injectEndpoints({
       invalidatesTags: ["readingLists"],
     }),
 
+    getSingleReadingLists: builder.query({
+      query: (id) => `/readingLists/${id}`,
+      providesTags: ["readingLists"],
+    }),
+
     getAllReadingLists: builder.query({
       query: () => "/readingLists",
       providesTags: ["readingLists"],
