@@ -40,13 +40,13 @@ const Books = () => {
   };
 
   return (
-    <div className="grid grid-cols-12">
-      <div className="col-span-3 p-6 self-start sticky top-[84px] min-h-[calc(100vh-100px)]">
+    <div className="grid md:grid-cols-12">
+      <div className="md:col-span-3 p-6 self-start sticky top-[84px] md:min-h-[calc(100vh-100px)]">
         <form onClick={(e) => e.preventDefault()} className="form-control w-68">
           <input
             onChange={handleSearch}
             type="text"
-            placeholder="Search book..."
+            placeholder={`Search...`}
             className="input input-bordered w-full pr-16"
           />
         </form>
@@ -55,10 +55,7 @@ const Books = () => {
           <h1 className="text-xl uppercase">Filters</h1>
           <div className="mt-3 space-y-2 cursor-pointer">
             {filtersData.map((filterOptions) => (
-              <details
-                key={filterOptions.title}
-                className="dropdown flex flex-row"
-              >
+              <details key={filterOptions.title} className="dropdown flex">
                 <summary className="btn btn-sm">{filterOptions.title}</summary>
                 <ul className="p-2 menu bg-base-100 max-h-[calc(100vh-229px)] overflow-auto scrollbar-none">
                   {filterOptions.options.map((option) => (
@@ -99,11 +96,11 @@ const Books = () => {
       </div>
 
       {data?.data.length === 0 ? (
-        <p className="col-span-9 text-2xl my-32 font-semibold text-center">
+        <p className="md:col-span-9 text-xl lg:text-2xl  my-16 lg:my-32 font-semibold text-center">
           No books are founded!
         </p>
       ) : (
-        <div className="col-span-9">
+        <div className="md:col-span-9">
           {isLoading ? (
             <Loading />
           ) : (

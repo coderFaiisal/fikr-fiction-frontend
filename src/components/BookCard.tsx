@@ -29,7 +29,6 @@ const BookCard = ({ book }: IProps) => {
 
   //wish list functionality
   const { data: wishData } = useGetSingleWishListsQuery(book?._id);
-
   const [
     createWishList,
     {
@@ -139,7 +138,7 @@ const BookCard = ({ book }: IProps) => {
         <p>Ratings: {book?.ratings}</p>
 
         <div className="card-actions flex items-center justify-center">
-          {user && wishData?.data === null ? (
+          {!user || !wishData?.data ? (
             <button
               onClick={handleAddToWishlist}
               className="rounded-full tooltip"
@@ -165,7 +164,7 @@ const BookCard = ({ book }: IProps) => {
             </button>
           )}
 
-          {user && readingData?.data === null ? (
+          {!user || !readingData?.data ? (
             <button
               onClick={handleAddToReadinglist}
               className="rounded-full tooltip"

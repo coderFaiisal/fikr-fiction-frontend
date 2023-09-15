@@ -22,7 +22,7 @@ const Home = () => {
         {isLoading ? (
           <Loading />
         ) : (
-          <div className="grid grid-cols-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
             {[...data.data]
               ?.sort(
                 (a: IBook, b: IBook) =>

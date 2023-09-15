@@ -42,7 +42,7 @@ const Login = () => {
       toast.success("User logging successfully");
       navigate(from, { replace: true });
     }
-  }, [data, error, from, isLoggedIn, navigate]);
+  }, [data, error, from, navigate]);
 
   return (
     <div className="hero min-h-screen bg-base-100">
