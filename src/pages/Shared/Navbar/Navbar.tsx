@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import logo from "../../../../public/Logo.ico";
+import logoIcon from "../../../../public/logo.ico";
 import { useAppDispatch, useAppSelector } from "../../../redux/hook";
 import { userLoggedOut } from "../../../redux/features/user/userSlice";
 import {
@@ -62,7 +62,7 @@ const Navbar = () => {
       </div>
       <div className="navbar-start">
         <Link to="/">
-          <img className="w-40" src={logo} alt="website-logo" />
+          <img className="w-40" src={logoIcon} alt="website-logo" />
         </Link>
       </div>
 

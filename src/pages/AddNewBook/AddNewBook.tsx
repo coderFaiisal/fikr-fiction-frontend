@@ -40,12 +40,12 @@ const AddNewBook = () => {
   }, [isSuccess, error, navigate]);
   return (
     <div className="flex justify-center mx-auto">
-      <div className="w-[50%] my-10">
-        <p className="text-center text-5xl font-semibold mb-10">
+      <div className="w-[80%] md:w-[60%] lg:w-[50%] my-6 md:my-10">
+        <p className="text-center text-2xl md:text-3xl lg:text-4xl font-semibold mb-10">
           Add Book Information
         </p>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="grid gap-2">
+          <div className="grid gap-2 ">
             <div className="grid gap-2">
               <div>
                 <p className="font-semibold">Book Title</p>

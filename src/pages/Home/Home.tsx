@@ -14,8 +14,8 @@ const Home = () => {
       <div>
         <img className="w-full" src={bg} alt="background-image" />
       </div>
-      <div className="my-16">
-        <h1 className="uppercase text-5xl font-bold text-center">
+      <div className=" my-6 lg:my-16">
+        <h1 className="uppercase text-3xl md:text-4xl lg:text-5xl font-bold text-center">
           Top 10 recently added books
         </h1>
 

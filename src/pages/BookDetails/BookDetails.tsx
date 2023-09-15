@@ -38,27 +38,31 @@ const BookDetails = () => {
   return (
     <div className="px-10 xl:px-20 py-10">
       <div className="flex mx-auto items-center gap-12 pb-10  border-b border-gray-300">
-        <div className="w-[30%]">
+        <div className="w-[50%] lg:w-[30%]">
           <img className="w-full" src={data?.data?.photoURL} />
         </div>
         <div className="w-[70%] space-y-3">
-          <h1 className="text-3xl font-semibold">{data?.data?.title}</h1>
-          <p className="text-xl">Author: {data?.data?.author}</p>
-          <p className="text-xl">Genre: {data?.data?.genre}</p>
-          <p className="text-xl">
+          <h1 className="text-2xl md:text-3xl font-semibold">
+            {data?.data?.title}
+          </h1>
+          <p className="text-md md:text-xl">Author: {data?.data?.author}</p>
+          <p className="text-md md:text-xl">Genre: {data?.data?.genre}</p>
+          <p className=" text-md md:text-xl">
             Publication Year: {data?.data?.publicationYear}
           </p>
-          <p className="text-xl">Rating: {data?.data?.ratings}</p>
+          <p className="text-md md:text-xl">Rating: {data?.data?.ratings}</p>
           <div className="flex space-x-3 pt-2">
             {data?.data?.authorEmail === user?.email && (
               <>
                 <Link to={`/update-book/${id}`}>
-                  <button className="btn btn-primary">Edit</button>
+                  <button className="btn btn-xs md:btn-sm btn-primary">
+                    Edit
+                  </button>
                 </Link>
 
                 {/* delete modal button */}
                 <label
-                  className="btn bg-red-500 text-white "
+                  className="btn btn-xs md:btn-sm bg-red-500 text-white "
                   htmlFor="modalForm"
                 >
                   Delete

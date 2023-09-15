@@ -1,10 +1,10 @@
-import logo from "../../../../public/logo.ico";
+import logoIcon from "../../../../public/logo.ico";
 
 const Footer = () => {
   return (
     <footer className="footer p-10 bg-base-200 text-base-content">
       <aside>
-        <img src={logo} alt="website-logo" />
+        <img src={logoIcon} alt="website-logo" />
         <p>
           ACME Industries Ltd.
           <br />
