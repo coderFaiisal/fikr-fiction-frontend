@@ -95,7 +95,7 @@ const Books = () => {
         </div>
       </div>
 
-      {data?.data.length === 0 ? (
+      {data?.data?.length === 0 ? (
         <p className="md:col-span-9 text-xl lg:text-2xl  my-16 lg:my-32 font-semibold text-center">
           No books are founded!
         </p>

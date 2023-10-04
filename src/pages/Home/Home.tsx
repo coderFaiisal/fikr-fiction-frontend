@@ -23,7 +23,7 @@ const Home = () => {
           <Loading />
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
-            {[...data.data]
+            {[...data?.data]
               ?.sort(
                 (a: IBook, b: IBook) =>
                   parseFloat(b.ratings) - parseFloat(a.ratings)
